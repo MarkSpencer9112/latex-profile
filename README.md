@@ -1,0 +1,2 @@
+# latex-profile
+none
