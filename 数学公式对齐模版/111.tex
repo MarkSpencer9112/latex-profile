@@ -1,0 +1,312 @@
+\documentclass[UTF8,
+no-math,
+12pt,
+openany,
+table,
+dvipsnames,
+svgnames]{article}
+\usepackage{indentfirst}
+\usepackage[fontset=fandol]{ctex}
+\usepackage{amsmath,amssymb,mathrsfs,bm}
+\usepackage[centering,
+           top=0.8in,bottom=0.8in,right=.7in,left=.7in]{geometry}
+\usepackage{nicematrix}
+\usepackage[listings,breakable,skins]{tcolorbox}
+\tcbuselibrary{listings,breakable}
+
+
+\definecolor{Cblue}{RGB}{14,138,235}
+\definecolor{Red}{RGB}{152,0,0}
+
+\usepackage{tikz}
+\usetikzlibrary{fit}
+\tikzset{highlight/.style={rectangle,
+fill=red!15,
+rounded corners = 0.5 mm,
+inner sep=1pt,
+fit=#1}}
+
+
+
+\usepackage[listings,breakable,skins]{tcolorbox}
+\tcbset{breakable,enhanced,
+  skin=bicolor,
+  boxrule=0.75pt,
+colback=Cblue!8!white,
+colframe=Cblue,
+top=5pt,
+bottom=0pt,
+  frame style={%
+    left color=Cblue,
+    right color=Cblue},
+  colbacklower=Red!1!white,
+  }
+\newtcblisting{listing}{
+  sidebyside
+}
+
+
+
+\usepackage[hyperindex]{hyperref}
+
+\usepackage{cases,empheq}
+\DeclareMathOperator\dif{d\!}
+
+\setmainfont{Times New Roman}
+
+\lstset{
+	    basicstyle=\footnotesize\ttfamily\lst@ifdisplaystyle\footnotesize\fi,
+	    tabsize=1,
+        breaklines=true,	
+	    numbers=none,	
+	    numberstyle=\tiny\sffamily\color{Cblue},
+	    numbersep=0em,
+	    keepspaces=true,
+	    keywordstyle=\color{Red},
+	    commentstyle=\color{gray!80!white},
+	    stringstyle=\color{green},
+       emph={pmatrix,gather,aligned,align,equation,iiint,iint,int,
+       pNiceMatrix,bNiceMatrix,BNiceMatrix,vNiceMatrix,VNiceMatrix},
+	   emphstyle={\color{Cblue}},
+	    captionpos = t,
+	    frame = tb,
+	    framerule=0pt,
+	    rulecolor = \color{green},
+	}
+
+\renewcommand{\d}{{\rm d}}
+
+\begin{document}
+
+\begin{center}
+ {\bf{{\huge {\textcolor{Red}\LaTeX{}} {\textcolor{Cblue}{数学公式对齐}}}}}
+\end{center}
+
+\vskip 1em
+
+\kaishu
+
+
+
+\LaTeX{} 的宏包amsmath 提供了很多除\LaTeX{} 自带如\verb|$$公式$$|、\verb|\[公式\]|之外的行间公式环境，本文将以如何排版多行公式对齐为主要内容，分享典型的应用案例。
+\begin{verbatim}
+equation   equation*    align     align*
+gather     gather*      alignat   alignat*
+multline   multline*    flalign   flalign*
+split      cases
+\end{verbatim}
+
+通常而言，上面的公式环境中带“*”号一般是去掉公式编号，而不带“*”号的公式通常会自动的进行编号。而在公式对齐方面我们可以分为多行对齐，多列对齐，多行多列对齐以及左中右对齐等。
+
+
+\noindent
+{\large\bf{\textcolor{Red}{一、长公式折成多行对齐}}}
+
+多行公式可分为同一公式折行对齐和多行公式对齐，前者一般都会选择如$=$、$>$、$<$、$\leqslant$、$\geqslant$位置对齐，而后者通常会选择同一运算符或者左对齐方式。同一公式折行对齐如：
+\begin{tcblisting}{sidebyside,lefthand width=10cm}
+\begin{align*}
+f^{\prime}(x)
+    & =\int f^{\prime\prime}(x)\d x\\
+    & =\frac{\d}{\d x}f(x)\\
+    & =\frac{{\d}^2}{\d x^2}\int f(x)\d x \\
+    & =\frac{\partial}{\partial x} f(x)\d x
+\end{align*}
+\end{tcblisting}
+
+\begin{tcblisting}{sidebyside,lefthand width=10cm}
+\begin{align*}
+(Z_2-Z_1) &=-\frac{R_d}{g_0}\bar{T}_v
+\ln\Big(\frac{dp}{p}\Big) \\
+          &= -\frac{287 \times 255}{9.81} \ln{\frac{P_2}{P_1}} \\
+          &= -7.4\ln{\frac{P_2}{P_1}}
+\end{align*}
+\end{tcblisting}
+
+\begin{tcblisting}{colback=Red!4!white}
+\begin{align*}
+\int_0^{\infty} \dfrac{\sin (x)}{x} \dfrac{\sin \left(\dfrac{x}{3}\right)}{\dfrac{x}{3}} \ldots \dfrac{\sin \left(\dfrac{x}{15}\right)}{\dfrac{x}{15}} \mathrm{d}x
+&=\dfrac{467807924713440738696537864469}{935615849440640907310521750000}\pi\\
+&=\dfrac{\pi}{2}-\dfrac{6879714958723010}{935615849440640907310521750000}\pi\\
+&=\dfrac{\pi}{2}-2.31\times 10^{-11}
+\end{align*}
+\end{tcblisting}
+
+\noindent
+{\large\bf{\textcolor{Red}{二、多个公式对齐}}}
+
+
+对于多个式子长度相当，且有相同或明显相似运算符的多个式子，我们通常选择在该运算符前对齐。
+
+\begin{tcblisting}{sidebyside,lefthand width=10cm}
+\begin{align*}
+\int_0^{\infty} \dfrac{\cos x}{1+x^2}\d x & =\frac{\pi}{2 e} \\
+\int_0^{\infty} \dfrac{\cos x y}{\left(1+x^2\right)} \d x & =\dfrac{\pi e^{-y}}{2} \\
+\int_0^{\infty} \dfrac{\cos x y}{x^2+a^2} \d x & =\frac{\pi e^{-a y}}{2 a}
+\end{align*}
+\end{tcblisting}
+
+\begin{tcblisting}{sidebyside,lefthand width=10cm}
+\begin{align*}
+d\dot{q}     &=d\dot{u}+d\dot{w}  \\
+\frac{DU}{Dt}&=\frac{Dq}{Dt}-\frac{Dw}{Dt}\\
+C_v\frac{DT}{Dt}&=\frac{Dq}{Dt}-p\frac{D\alpha}{Dt}
+\end{align*}
+\end{tcblisting}
+
+\begin{tcblisting}{sidebyside,lefthand width=10cm}
+\begin{align*}
+d\Big(\frac{\partial f}{\partial x}\Big) &=\frac{\partial^2 f}{\partial x^2}dx + \frac{\partial^2 f}{\partial x \partial y}dy \\
+d\Big(\frac{\partial f}{\partial y}\Big) &=\frac{\partial^2 f}{\partial x \partial y}dx + \frac{\partial^2 f}{\partial y^2}dy 
+\end{align*}
+\end{tcblisting}
+
+
+\begin{tcblisting}{colback=Red!4!white}
+\begin{align*}
+   \frac{df}{dx}\Big{|}_{x=x_0} & \simeq \Big[\frac{f(x + \Delta x,t) - f(x,t)}{\Delta x}\Big] + O(\Delta x)\\
+   \frac{df}{dx}\Big{|}_{x=x_0} & \simeq \Big[\frac{f(x + \Delta x,t) - f(x,t)}{\Delta x}\Big] + O(\Delta x)
+\end{align*}
+\end{tcblisting}
+
+对于多个式子长度不一，但是式子结构相似，我们选择左对齐方式。
+
+
+\begin{tcblisting}{sidebyside,lefthand width=10cm}
+\begin{align*}
+& \frac{\partial \theta}{\partial t}\Big{|}_{t=t_0} \approx \frac{\theta(t_0)-\theta(t-t_0)}{(t-t_0)}\\
+& \frac{\partial \theta}{\partial t}\Big{|}_{t=t_0} \approx \frac{\theta(t_0)-\theta(t_{-1})}{\Delta t}
+\end{align*}
+\end{tcblisting}
+
+\begin{tcblisting}{colback=Red!4!white}
+\begin{align}
+    & \int_0^{\infty} \frac{\sin (x)}{x} \mathrm{d} x=\frac{\pi}{2} \\
+    & \int_0^{\infty} \frac{\sin (x)}{x} \frac{\sin (x / 3)}{x / 3} \mathrm{d} x=\frac{\pi}{2} \\
+    & \int_0^{\infty} \frac{\sin (x)}{x} \frac{\sin (x / 3)}{x / 3} \frac{\sin (x / 5)}{x / 5} \mathrm{d} x=\frac{\pi}{2} \\
+    & \int_0^{\infty} \frac{\sin (x)}{x} \frac{\sin (x / 3)}{x / 3} \frac{\sin (x / 5)}{x / 5} \frac{\sin (x / 7)}{x / 7} \mathrm{d} x=\frac{\pi}{2}\\
+    &\int_0^{\infty} \frac{\sin (x)}{x} \frac{\sin (x / 3)}{x / 3} \ldots \frac{\sin (x / 13)}{x / 13} \mathrm{d} x=\frac{\pi}{2}
+\end{align}
+\end{tcblisting}
+
+多个折行公式对齐：
+\begin{tcblisting}{sidebyside,lefthand width=9cm}
+\begin{align*}
+(Z_2-Z_1) &=-\frac{R_d}{g_0}\bar{T}_v
+\ln\Big(\frac{dp}{p}\Big) \\
+          &= \frac{287\times 288 K}{9.81 m/s^2} \ln\frac{1000 hPa}{500 hPa} \\
+          &= 5840.2419km\\
+(Z_2-Z_1) &=-\frac{R_d}{g_0}\bar{T}_v
+\ln\Big(\frac{dp}{p}\Big) \\
+          &= \frac{287\times 233 K}{9.81 m/s^2} \ln\frac{1000 hPa}{500 hPa} \\
+          &= 4724.9179km
+\end{align*}
+\end{tcblisting}
+
+\noindent
+{\large\bf{\textcolor{Red}{三、多个式子居中对齐}}}
+
+独立的多个公式长短不一，或者投稿期刊排版要求等，有时候要求公式居中对齐，公式居中对齐我们通常采用gather数学公式环境来实现。
+
+\begin{tcblisting}{colback=Red!4!white}
+\begin{gather*}
+\underbrace{\frac{DT}{Dt}}_\text{Lagrangian Derivative} = \underbrace{\underbrace{\frac{\partial T}{\partial t}}_\text{Local derivative} + \underbrace{\vec{V}\cdot \nabla T}_\text{Advective Term}}_\text{Euler Derivative}\\
+\frac{DT}{Dt} = \frac{\partial T}{\partial t} + u\frac{\partial T}{\partial x} + v\frac{\partial T}{\partial y} + w\frac{\partial T}{\partial z}
+\end{gather*}
+\end{tcblisting}
+
+在居中对齐情况中，有时候遇见长式子折行等情况，通常会用aligned环境将整个小块包起来，这一小块内部可以设置对齐方式。
+
+\begin{tcblisting}{sidebyside,lefthand width=7cm}
+\begin{gather*}
+\begin{aligned}
+\hat{t}&=t,\\\hat{x}&=x,\\\hat{y}&=
+\dfrac{y}{\sqrt{\varepsilon}}
+\end{aligned}\\ \begin{aligned}
+\partial_{t}\rho+\bigtriangledown
+\cdot(\rho u)&=\partial_{t}\rho+
+(u\cdot\bigtriangledown)\rho+
+\rho(\bigtriangledown\cdot u)\\
+&=\partial_{t}\rho +(u_{1}\partial_{x}+u_{2}
+\partial_{y})\\&+\rho(\partial_{x} u_{1}+\partial_{y}u_{2})\\
+&=0 \end{aligned}
+\end{gather*}
+\end{tcblisting}
+
+\noindent
+{\large\bf{\textcolor{Red}{四、方程组对齐}}}
+
+在方程组公式输入过程中，我们通常采用的数学环境是cases环境，值得注意的的是，cases环境不能单独使用，需要套在align、equation等数学公式环境下才可以使用。
+\begin{equation*}
+\begin{cases}
+\ddot{\theta}+\omega^2\theta =0\\
+\dfrac{d^2\theta}{dt^2}+\omega^2\theta=0\\
+\theta(t)=A \cos(\omega t)+B\sin(\omega t)
+\end{cases}
+\end{equation*}
+
+\begin{tcblisting}{sidebyside,lefthand width=9cm}
+\begin{equation*}
+\begin{cases}
+\ddot{\theta}+\omega^2\theta =0\\
+\dfrac{d^2\theta}{dt^2}+\omega^2\theta=0\\
+\theta(t)=A \cos(\omega t)+B\sin(\omega t)
+\end{cases}
+\end{equation*}
+\end{tcblisting}
+
+对于cases环境中的多个公式，我们还可以通过“\&”来固定对齐位置，下面给出案列：
+
+\begin{tcblisting}{sidebyside,lefthand width=10cm}
+\begin{equation*}
+\begin{cases}
+{{\bm{Ax}}}\leq {\bm d},& {\bm x}\in\{0, 1\}\\
+{\bm{Hu}}\geq {{\bm h}},& {\bm u}\in \{0, 1\}
+\end{cases}
+\end{equation*}
+\end{tcblisting}
+
+我们在方程组输入过程中，有时候局部的方程组式子之间的间距过近（如分式、求和符号等），局部的调整可以在断行命令“\verb|\\|”后紧跟“\verb|[输入宽度如：20pt]|”命令来调整两个式子之间的行间距。
+\begin{tcblisting}{colback=Red!4!white}
+\begin{equation*}
+\begin{cases}
+f(t+t_0)& =f(t_0) + (t+t_0)\dfrac{\partial f}{\partial t}\Big{|}_{t=t_0}+ \dfrac{(t+t_0)^2}{2!} \dfrac{\partial^2 f}{\partial t^2}\Big{|}_{t=t_0}+\cdots\\[10pt]
+f(t+\Delta t) & = f(t_0) + \Delta t \frac{\partial f}{\partial t}\Big{|}_{t=t_0}+ \dfrac{(\Delta t)^2}{2!} \frac{\partial^2 f}{\partial t^2}\Big{|}_{t=t_0} + \cdots
+\end{cases}
+\end{equation*}
+\end{tcblisting}
+
+存在方程组长公式需要公式之间对齐、折行也要对齐时，我们可以考虑：
+
+\begin{tcblisting}{sidebyside,lefthand width=9.5cm}
+\begin{equation*}
+\begin{cases}
+T_{v,a} &= T_a(1+0.61q_a)\\
+        &= 302(1+0.61 \times 24 \times 10^{-3})\\
+        &= 306.42128 K\\
+T_{v,s} &= T_s(1+0.61q_s)\\
+        &= 303(1+0.61 \times 5 \times 10^{-3})\\
+        &= 303.92415 K
+\end{cases}
+\end{equation*}
+\end{tcblisting}
+
+在cases公式环境中，默认方程组括号是在左边，有时候我们需要用到括号在右边括起来，这时候我们可以考虑使用rcases环境。
+
+\begin{tcblisting}{colback=Red!4!white}
+\begin{align*}
+\begin{rcases}
+f(x+\Delta x) & = f(x) + \Delta x\frac{\partial f}{\partial x}\Big{|}_{x=x_0}\\
+              & + \frac{(\Delta x)^2}{2!} \frac{\partial^2 f}{\partial x^2}\Big{|}_{t=x_0}\\
+              & + \frac{(\Delta x)^3}{3!} \frac{\partial^3 f}{\partial x^3}\Big{|}_{t=x_0}+\quad\cdots
+\end{rcases}\\
+\begin{rcases}
+f(x-\Delta x) & = f(x) - \Delta x\frac{\partial f}{\partial x}\Big{|}_{x=x_0} \\
+              & +\frac{(\Delta x)^2}{2!} \frac{\partial^2 f}{\partial x^2}\Big{|}_{t=x_0}\\
+              & -\frac{(\Delta x)^3}{3!} \frac{\partial^3 f}{\partial x^3}\Big{|}_{t=x_0}+\quad\cdots
+\end{rcases}
+\end{align*}
+\end{tcblisting}
+
+
+\end{document}
+
