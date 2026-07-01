@@ -1,0 +1,127 @@
+\documentclass[11pt,a4paper]{ctexart}
+
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{tcolorbox}
+\usepackage{amssymb}
+\usepackage{hyperref}
+
+\definecolor{accent}{HTML}{2F6F73}
+\definecolor{soft}{HTML}{EEF6F5}
+\definecolor{linegray}{HTML}{D8DEE2}
+\definecolor{textgray}{HTML}{44505A}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=accent,
+  urlcolor=accent
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setlist[itemize]{leftmargin=1.5em,itemsep=0.25em}
+\setlist[enumerate]{leftmargin=1.7em,itemsep=0.25em}
+
+\titleformat{\section}
+  {\Large\bfseries\color{accent}}
+  {\thesection}
+  {0.6em}
+  {}
+  [\titlerule]
+
+\titleformat{\subsection}
+  {\large\bfseries\color{textgray}}
+  {\thesubsection}
+  {0.6em}
+  {}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{textgray}{课程/主题：\underline{\hspace{4cm}}}}
+\rhead{\textcolor{textgray}{日期：\underline{\hspace{2.6cm}}}}
+\cfoot{\textcolor{textgray}{第 \thepage\ 页 / 共 \pageref{LastPage} 页}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{linegray}\leaders\hrule height \headrulewidth\hfill}}
+
+\newtcolorbox{notebox}[1]{
+  colback=soft,
+  colframe=accent,
+  boxrule=0.7pt,
+  arc=2mm,
+  left=8pt,
+  right=8pt,
+  top=7pt,
+  bottom=7pt,
+  title=\textbf{#1}
+}
+
+\newcommand{\checkbox}{\(\square\)}
+\newcommand{\noteline}{\rule{\linewidth}{0.4pt}\\[0.9em]}
+
+\begin{document}
+
+\begin{center}
+  {\Huge\bfseries 笔记模板}\\[0.35em]
+  {\large 用于课堂、会议、读书与项目复盘}
+\end{center}
+
+\vspace{0.8em}
+
+\begin{tabularx}{\textwidth}{@{}lX lX@{}}
+  \textbf{标题} & \underline{\hspace{6.5cm}} &
+  \textbf{地点} & \underline{\hspace{4cm}} \\
+  \textbf{关键词} & \underline{\hspace{6.5cm}} &
+  \textbf{来源} & \underline{\hspace{4cm}} \\
+\end{tabularx}
+
+\section{核心摘要}
+\begin{notebox}{一句话总结}
+  \vspace{1.6cm}
+\end{notebox}
+
+\section{主要内容}
+\subsection{重点一}
+\noteline
+\noteline
+\noteline
+
+\subsection{重点二}
+\noteline
+\noteline
+\noteline
+
+\subsection{重点三}
+\noteline
+\noteline
+\noteline
+
+\section{问题与思考}
+\begin{enumerate}
+  \item \noteline
+  \item \noteline
+  \item \noteline
+\end{enumerate}
+
+\section{待办事项}
+\begin{tabularx}{\textwidth}{@{}p{1cm}X p{3.2cm}@{}}
+  \textbf{} & \textbf{任务} & \textbf{截止时间} \\
+  \checkbox & \noteline & \underline{\hspace{2.5cm}} \\
+  \checkbox & \noteline & \underline{\hspace{2.5cm}} \\
+  \checkbox & \noteline & \underline{\hspace{2.5cm}} \\
+\end{tabularx}
+
+\section{复盘}
+\begin{notebox}{收获}
+  \vspace{1.4cm}
+\end{notebox}
+
+\begin{notebox}{下一步}
+  \vspace{1.4cm}
+\end{notebox}
+
+\end{document}

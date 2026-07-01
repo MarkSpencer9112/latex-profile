@@ -1,0 +1,50 @@
+\documentclass[UTF8,
+no-math,
+12pt,
+openany,
+table,
+dvipsnames,
+svgnames]{article}
+
+% 使用 ctexbook 或 ctexart 并开启 vertical 选项
+\usepackage[UTF8,fontset=none]{ctex}
+\usepackage{xeCJK}
+\usepackage{fontspec}
+
+% 配置字体：尝试多种系统字体并回退，确保中文可用
+% 优先使用 STHeiti，其次 Apple SD Gothic Neo / PingFang TC，最后回退到 Arial Unicode MS
+\setCJKmainfont[Path=./,Extension=.ttf]{maozedong-1}
+
+% 设置页面边距，适应竖排书籍版式
+\usepackage[margin=2.5cm]{geometry}
+
+% 诗词排版环境设置
+\newenvironment{poetry}
+  {\begin{center}\Huge\itshape}
+  {\end{center}}
+
+\begin{document}
+
+% 开启竖排模式
+多么凄美的命题啊！其日牛马嘶，新妇入青庐，奄奄黄昏后，寂寂人定初，我命绝今日，
+魂去尸长留，揽裙脱丝履，举身赴清池，府吏闻此事，心知长别离，徘徊庭树下，自挂东南
+枝。
+
+\begin{poetry}
+
+
+大漠孤烟直\\
+长河落日圆\\
+北戴河\\
+毛泽东
+\end{poetry}
+
+\vspace{2cm}
+
+% 正文示例
+
+多么凄美的命题啊！其日牛马嘶，新妇入青庐，奄奄黄昏后，寂寂人定初，我命绝今日，
+魂去尸长留，揽裙脱丝履，举身赴清池，府吏闻此事，心知长别离，徘徊庭树下，自挂东南
+枝。
+
+\end{document}
