@@ -1,0 +1,16 @@
+\contentsline {section}{\numberline {1}代数 (Algebra)}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}群论}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}环与域}{2}{subsection.1.2}%
+\contentsline {section}{\numberline {2}数学分析 (Analysis)}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}极限与连续}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}微分}{2}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}积分}{2}{subsection.2.3}%
+\contentsline {section}{\numberline {3}线性代数 (Linear Algebra)}{3}{section.3}%
+\contentsline {subsection}{\numberline {3.1}向量空间}{3}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}线性变换与矩阵}{3}{subsection.3.2}%
+\contentsline {section}{\numberline {4}公式排版示例}{3}{section.4}%
+\contentsline {subsection}{\numberline {4.1}align 环境 (带对齐)}{3}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}cases 环境 (分段函数)}{3}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}matrix 环境 (矩阵)}{3}{subsection.4.3}%
+\contentsline {section}{\numberline {5}交换图 (需要 tikz-cd)}{3}{section.5}%
+\contentsline {section}{\numberline {6}笔记区}{4}{section.6}%

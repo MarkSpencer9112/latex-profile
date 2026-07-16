@@ -1,0 +1,198 @@
+\documentclass[12pt,a4paper]{article}
+
+% ───── 编码与字体 ─────
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{geometry}
+\geometry{top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm}
+
+% ───── 常用数学符号包 ─────
+\usepackage{bm}                          % 粗体数学符号
+\usepackage{esint}                       % 多重积分符号
+\usepackage{physics}                     % 物理符号（微分算子、bra-ket等）
+
+% ───── 超链接 ─────
+\usepackage[hidelinks]{hyperref}
+
+% ───── 定理环境 ─────
+\theoremstyle{definition}
+\newtheorem{definition}{定义}[section]
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}{引理}[section]
+\newtheorem{corollary}{推论}[section]
+\newtheorem{proposition}{命题}[section]
+\newtheorem{example}{例子}[section]
+\newtheorem{remark}{注记}[section]
+
+% ───── 自定义命令 ─────
+% 常用数集
+\newcommand{\R}{\mathbb{R}}              % 实数集
+\newcommand{\C}{\mathbb{C}}              % 复数集
+\newcommand{\N}{\mathbb{N}}              % 自然数集
+\newcommand{\Z}{\mathbb{Z}}              % 整数集
+\newcommand{\Q}{\mathbb{Q}}              % 有理数集
+\newcommand{\F}{\mathbb{F}}              % 域
+
+% 分析符号
+\newcommand{\eps}{\varepsilon}           % 小量 epsilon
+\newcommand{\vphi}{\varphi}              % phi 变体
+\newcommand{\p}{\partial}                % 偏微分符号
+
+% 括号与范数
+\providecommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\providecommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\inner}[1]{\left\langle #1 \right\rangle}
+\providecommand{\bra}[1]{\left\langle #1 \right\rvert}
+\providecommand{\ket}[1]{\left\lvert #1 \right\rangle}
+\providecommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+% 数理逻辑
+\newcommand{\st}{\text{ s.t. }}         % such that
+\newcommand{\iffdef}{\stackrel{\text{def}}{\iff}}  % 当且仅当定义
+
+% ───── 文档信息 ─────
+\title{\textbf{数学笔记模板}}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════
+% 第一部分：代数
+% ═══════════════════════════════════════════
+\section{代数 (Algebra)}
+
+\subsection{群论}
+\begin{definition}[群]
+  一个集合 $G$ 连同二元运算 $\cdot: G \times G \to G$ 称为一个\textbf{群}，若满足：
+  \begin{enumerate}
+    \item \textbf{封闭性}：$\forall a,b \in G,\; a\cdot b \in G$
+    \item \textbf{结合律}：$\forall a,b,c \in G,\; (a\cdot b)\cdot c = a\cdot(b\cdot c)$
+    \item \textbf{幺元}：$\exists e \in G,\; \forall a\in G,\; e\cdot a = a\cdot e = a$
+    \item \textbf{逆元}：$\forall a\in G,\; \exists b\in G,\; a\cdot b = b\cdot a = e$
+  \end{enumerate}
+\end{definition}
+
+\begin{theorem}[Lagrange 定理]
+  若 $G$ 是有限群，$H$ 是 $G$ 的子群，则
+  \[
+  |G| = [G:H] \cdot |H|.
+  \]
+\end{theorem}
+
+\subsection{环与域}
+\begin{definition}[域]
+  一个可交换含幺环 $\F$ 称为\textbf{域}，如果每个非零元都有乘法逆元。
+\end{definition}
+
+% ═══════════════════════════════════════════
+% 第二部分：数学分析
+% ═══════════════════════════════════════════
+\section{数学分析 (Analysis)}
+
+\subsection{极限与连续}
+\begin{definition}[极限]
+  设 $f: D \to \R$，$x_0$ 是 $D$ 的聚点。称 $\displaystyle\lim_{x\to x_0} f(x) = L$ 若
+  \[
+  \forall \eps > 0,\; \exists \delta > 0,\; \st 0 < \abs{x - x_0} < \delta \implies \abs{f(x) - L} < \eps.
+  \]
+\end{definition}
+
+\subsection{微分}
+\begin{theorem}[中值定理]
+  设 $f$ 在 $[a,b]$ 上连续，在 $(a,b)$ 内可微，则存在 $\xi \in (a,b)$ 使得
+  \[
+  f'(\xi) = \frac{f(b) - f(a)}{b - a}.
+  \]
+\end{theorem}
+
+\subsection{积分}
+\begin{theorem}[微积分基本定理]
+  若 $F'(x) = f(x)$，则
+  \[
+  \int_a^b f(x)\,dx = F(b) - F(a).
+  \]
+\end{theorem}
+
+% ═══════════════════════════════════════════
+% 第三部分：线性代数
+% ═══════════════════════════════════════════
+\section{线性代数 (Linear Algebra)}
+
+\subsection{向量空间}
+\begin{definition}[向量空间]
+  设 $V$ 是 $\F$ 上的向量空间。$\{v_1,\dots,v_n\} \subset V$ 称为\textbf{基}，若线性无关且张成 $V$。
+\end{definition}
+
+\subsection{线性变换与矩阵}
+\begin{theorem}[秩-零化度定理]
+  设 $T: V \to W$ 是线性变换，则
+  \[
+  \dim V = \dim\ker T + \dim\operatorname{Im} T.
+  \]
+\end{theorem}
+
+% ═══════════════════════════════════════════
+% 第四部分：多行公式示例
+% ═══════════════════════════════════════════
+\section{公式排版示例}
+
+\subsection{align 环境 (带对齐)}
+\begin{align}
+  (x + y)^3 &= (x + y)(x + y)^2 \\
+            &= (x + y)(x^2 + 2xy + y^2) \\
+            &= x^3 + 3x^2 y + 3x y^2 + y^3.
+\end{align}
+
+\subsection{cases 环境 (分段函数)}
+\[
+f(x) =
+\begin{cases}
+  e^{-x}, & x \ge 0, \\[4pt]
+  0,      & x < 0.
+\end{cases}
+\]
+
+\subsection{matrix 环境 (矩阵)}
+\[
+\begin{pmatrix}
+  a_{11} & a_{12} & \cdots & a_{1n} \\
+  a_{21} & a_{22} & \cdots & a_{2n} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{pmatrix}
+\]
+
+% ═══════════════════════════════════════════
+% 第五部分：交换图示例
+% ═══════════════════════════════════════════
+\section{交换图 (需要 tikz-cd)}
+% 使用 tikz-cd 需要导入 \usepackage{tikz-cd}
+% \[
+% \begin{tikzcd}
+%   A \arrow[r, "f"] \arrow[d, "g"'] & B \arrow[d, "h"] \\
+%   C \arrow[r, "k"']                 & D
+% \end{tikzcd}
+% \]
+
+% ═══════════════════════════════════════════
+% 第六部分：空笔记页
+% ═══════════════════════════════════════════
+\newpage
+\section{笔记区}
+
+% 此处用于手写或课堂笔记整理
+\begin{remark}
+  
+\end{remark}
+
+\begin{example}
+  
+\end{example}
+
+\end{document}
